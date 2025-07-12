@@ -4,21 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            margin: 0;
+            padding-inline: 0;
+            padding-block: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            margin-top: 20px;
+            text-align: center;
+            color: #28a745;
+        }
+
+        .info-section {
+            margin-top: 30px;
+            background-color: #f1f3f5;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #212529;
+        }
+
+        .info-section h4 {
+            margin-top: 1rem;
+            color: #495057;
+        }
+
+        .info-section ul {
+            padding-left: 20px;
+            margin-top: 0.5rem;
+        }
+
+        .info-section ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .info-section p {
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-    <h2>Gestational Diabetes Prediction</h2>
-    <form method="POST" action="/predict">
-        <label>Pregnancies:</label><input type="number" name="Pregnancies" step="any" required><br>
-        <label>Glucose:</label><input type="number" name="Glucose" step="any" required><br>
-        <label>BloodPressure:</label><input type="number" name="BloodPressure" step="any" required><br>
-        <label>Insulin:</label><input type="number" name="Insulin" step="any" required><br>
-        <label>BMI:</label><input type="number" name="BMI" step="any" required><br>
-        <label>Age:</label><input type="number" name="Age" step="any" required><br>
-        <button type="submit">Predict</button>
-    </form>
+    <div class="container">
+        <h2>Gestational Diabetes Prediction</h2>
 
-    {% if prediction_text %}
-        <h3>{{ prediction_text }}</h3>
-    {% endif %}
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+
+        <form method="POST" action="/predict">
+            <label>Pregnancies:</label><input type="number" name="Pregnancies" step="any" required placeholder="e.g., 2"><br>
+            <label>Glucose:</label><input type="number" name="Glucose" step="any" required placeholder="e.g., 120"><br>
+            <label>BloodPressure:</label><input type="number" name="BloodPressure" step="any" required placeholder="e.g., 70"><br>
+            <label>Insulin:</label><input type="number" name="Insulin" step="any" required placeholder="e.g., 85"><br>
+            <label>BMI:</label><input type="number" name="BMI" step="any" required placeholder="e.g., 24.5"><br>
+            <label>Age:</label><input type="number" name="Age" step="any" required placeholder="e.g., 30"><br>
+            <button type="submit">Predict</button>
+        </form>
+        <div class="info-section">
+            <h4>About This Predictor</h4>
+            <p>This application predicts the likelihood of a person developing gestational diabetes based on clinical inputs. Enter the required details in the form above and click "Predict" to get the result.</p>
+            <h4>How to Interpret Results</h4>
+            <ul>
+                <li><strong>Will not develop gestational diabetes</strong> — Indicates a low risk based on the input values.</li>
+                <li><strong>Will develop gestational diabetes</strong> — Indicates a high risk and recommends consulting a healthcare provider.</li>
+            </ul>
+            <h4>Typical Ranges (non-diagnostic)</h4>
+            <ul>
+                <li>Glucose below 120 mg/dL is generally considered safe.</li>
+                <li>BMI between 18.5 and 24.9 is considered healthy.</li>
+                <li>Normal blood pressure is typically around 80 mm Hg diastolic.</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
